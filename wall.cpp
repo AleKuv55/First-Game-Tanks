@@ -14,11 +14,22 @@ GameObject()
     //rect_.setPosition(0, 0);
     rect_.setFillColor(sf::Color::Blue);
 //    spr_.setPosition(rect_.getPosition());
-//    spr_.setTextureRect(sf::IntRect(0, 0, 10, 10));
+    spr_.setTextureRect(sf::IntRect(0, 0, 102, 102));
     objectAlive = true;
     objectType_ = 3;
 }
 
+wall::wall(double x, double y, sf::Sprite spr, sf::RectangleShape rect):
+GameObject()
+{
+    rect_.setSize(sf::Vector2f(102, 102));
+    //rect_.setPosition(0, 0);
+    rect_.setFillColor(sf::Color::Blue);
+    //    spr_.setPosition(rect_.getPosition());
+    spr_.setTextureRect(sf::IntRect(0, 0, 102, 102));
+    objectAlive = true;
+    objectType_ = 3;
+}
 
 int wall::updateWall()
 {
@@ -28,4 +39,20 @@ int wall::updateWall()
 int wall:: draWall(sf::RenderWindow* window)
 {
     window -> draw(rect_);
+    window -> draw(spr_);
 }
+
+int wall::draw(sf::RenderWindow *window)
+{
+    window -> draw(rect_);
+//    window -> draw(spr_);
+
+}
+
+int wall::update()
+{
+    
+}
+
+int wall::collision()
+{}

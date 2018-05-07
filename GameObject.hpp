@@ -30,8 +30,9 @@ public:
     
     
     
-//    virtual draw() ;
-//    virtual move() ;
+    virtual int draw(sf::RenderWindow* window) = 0;
+    virtual int update() = 0;
+    virtual int collision() = 0;
     
 private:
 protected:

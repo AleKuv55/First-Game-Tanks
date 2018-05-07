@@ -85,3 +85,78 @@ int enemyTank::drawenemyTank(sf::RenderWindow* window)
 {
     window -> draw(spr_);
 }
+
+int enemyTank::draw(sf::RenderWindow *window)
+{
+    window -> draw(spr_);
+}
+
+int enemyTank::update()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+    {
+        if (1)
+        {
+            direction_ = 1;
+            spr_.setPosition(position_.x_, position_.y_);
+            
+            position_.y_ -= movementSpeed;
+            //                printf("y = %f", tank1.position_.y_);
+            //tank1.rect_.move(0,1);
+            
+            spr_.setTextureRect(sf::IntRect(0 * 200, 0, 195, 300));
+            
+        }
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
+    {
+        if (1)
+        {
+            direction_ = 2;
+            
+            spr_.setPosition(position_.x_, position_.y_);
+            
+            position_.x_ += movementSpeed;
+            //                printf("y = %f", tank1.position_.y_);
+            //tank1.rect_.move(0,1);
+            
+            spr_.setTextureRect(sf::IntRect(1 * 200, 0, 200, 300));
+        }
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::G))
+    {
+        if (1)
+        {
+            direction_ = 3;
+            
+            spr_.setPosition(position_.x_, position_.y_);
+            
+            position_.y_ += movementSpeed;
+            //                printf("y = %f", tank1.position_.y_);
+            //tank1.rect_.move(0,1);
+            
+            spr_.setTextureRect(sf::IntRect(2 * 204, 0, 200, 300));
+        }
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+    {
+        if (1)
+        {
+            direction_ = 4;
+            
+            spr_.setPosition(position_.x_, position_.y_);
+            
+            position_.x_ -= movementSpeed;
+            //                printf("y = %f", tank1.position_.y_);
+            //tank1.rect_.move(0,1);
+            
+            spr_.setTextureRect(sf::IntRect(3 * 200, 0, 200, 300));
+        }
+    }
+    return 0;
+}
+
+int enemyTank::collision()
+{
+    
+}

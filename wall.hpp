@@ -14,15 +14,19 @@ class wall: public GameObject
 {
 public:
     bool destructable = false;
-    int hp = 50;
+    int hp = 10;
     bool destroy = false;
     
     wall();
-    
+    wall(double x, double y, sf::Sprite spr, sf::RectangleShape rect);
     int updateWall();
     
     int draWall(sf::RenderWindow* window);
     
+    virtual int draw(sf::RenderWindow* window) override;
+    virtual int update() override;
+    virtual int collision() override;
+
 };
 
 #endif /* wall_hpp */

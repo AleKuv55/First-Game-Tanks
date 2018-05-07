@@ -14,6 +14,7 @@
 #include "enemyTank.hpp"
 #include "Tank.hpp"
 #include "wall.hpp"
+#include "TankFriend.hpp"
 
 class objectManager
 {

@@ -14,6 +14,10 @@
 #include "objectManager.hpp"
 #include "enemyTank.hpp"
 #include "wall.hpp"
+#include "TankFriend.hpp"
+
+// tiled
+// ogmo editor
 
 int main(int, char const**)
 {
@@ -36,27 +40,14 @@ int main(int, char const**)
     }
     sf::Sprite spriteDud(textureDud);
     sf::RectangleShape rect;
-    //rect.setPosition(600, 800);
-    //spriteDud.setPosition(100, 100);
-    class GameObject Dud(800, 600, spriteDud, rect);
-    Dud.spr_.setPosition(Dud.position_.x_, Dud.position_.y_);
+    rect.setPosition(600, 800);
+    spriteDud.setPosition(800, 600);
+//    class GameObject Dud(800, 600, spriteDud, rect);
+//    Dud.spr_.setPosition(Dud.position_.x_, Dud.position_.y_);
     
     
-    // The first Tank
-    sf::Texture textureTanki;
-    if (!textureTanki.loadFromFile(resourcePath() + "tanchiki2.png")) {
-        return EXIT_FAILURE;
-    }
-    sf::Sprite spriteTanki(textureTanki);
-    sf::RectangleShape rectTank;
-
-    class Tank tank1(window.getSize().x/2, window.getSize().y/2, spriteTanki, rectTank);
-    //tank1.spr_.setScale(0.5f, 0.5f);
-    tank1.spr_.setPosition(tank1.position_.x_, tank1.position_.y_);
-    tank1.spr_.setTextureRect(sf::IntRect(0, 0, 100, 100));
-    tank1.rect_.setSize(sf::Vector2f((100), (100)));
+   
     
-    //sf::Sprite sprite2 = tank1.spr_.setRotation(90);
     // The first Bullet
     sf::Texture textureBullet;
     if (!textureBullet.loadFromFile(resourcePath() + "bullet.png")) {
@@ -76,8 +67,8 @@ int main(int, char const**)
     sf::Sprite spritEnemyTank(texturEnemyTank);
     sf::RectangleShape rectEnemyTank;
     
-    class enemyTank enemyTank1(window.getSize().x/2, window.getSize().y/2, spritEnemyTank, rectEnemyTank);
-    enemyTank1.spr_.setScale(0.5f, 0.5f);
+    class enemyTank enemyTank1(window.getSize().x/2 - 80, window.getSize().y/2 - 191, spritEnemyTank, rectEnemyTank);
+    enemyTank1.spr_.setScale(0.4f, 0.4f);
     enemyTank1.spr_.setPosition(enemyTank1.position_.x_, enemyTank1.position_.y_);
 //    enemyTank1.spr_.setPosition(0, 0);
 
@@ -86,26 +77,79 @@ int main(int, char const**)
 
     
 
+    // The first Tank
+    sf::Texture textureTanki;
+    if (!textureTanki.loadFromFile(resourcePath() + "tanchiki2.png")) {
+        return EXIT_FAILURE;
+    }
+    sf::Sprite spriteTanki1(textureTanki);
+    sf::RectangleShape rectTank1;
+    
+    class Tank tank1(window.getSize().x/2 + 100 , window.getSize().y/2 + 100, spriteTanki1, rectTank1);
+    //tank1.spr_.setScale(0.5f, 0.5f);
+    tank1.spr_.setPosition(tank1.position_.x_, tank1.position_.y_);
+    tank1.spr_.setTextureRect(sf::IntRect(0, 0, 100, 100));
+    tank1.rect_.setSize(sf::Vector2f((100), (100)));
+    
+    /*sf::Sprite spriteTanki2(textureTanki);
+    sf::RectangleShape rectTank2;
+    
+    class Tank tank2(window.getSize().x/2 - 100 , window.getSize().y/2 - 100, spriteTanki2, rectTank2);
+    //tank1.spr_.setScale(0.5f, 0.5f);
+    tank2.spr_.setPosition(tank2.position_.x_, tank2.position_.y_);
+    tank2.spr_.setTextureRect(sf::IntRect(0, 0, 100, 100));
+    tank2.rect_.setSize(sf::Vector2f((100), (100)));*/
+    // The Friend Tank
+    sf::Texture textureFriendTank;
+    if (!textureFriendTank.loadFromFile(resourcePath() + "tanchiki2.png")) {
+        return EXIT_FAILURE;
+    }
+    sf::Sprite spriteTanki2(textureFriendTank);
+    sf::RectangleShape rectTank2;
+    
+    class TankFriend tank2(window.getSize().x/2 - 100 , window.getSize().y/2 , spriteTanki2, rectTank2);
+    //tank1.spr_.setScale(0.5f, 0.5f);
+    tank2.spr_.setPosition(tank2.position_.x_, tank2.position_.y_);
+    tank2.spr_.setTextureRect(sf::IntRect(0, 0, 100, 100));
+    tank2.rect_.setSize(sf::Vector2f((100), (100)));
     
     // The object Array
     class objectManager ObjectManager;
-    ObjectManager.objectAdd(&enemyTank1);
     ObjectManager.objectAdd(&tank1);
+    ObjectManager.objectAdd(&tank2);
+    ObjectManager.objectAdd(&enemyTank1);
     
     // The Wall Array
+    sf::Texture textureWall;
+    if (!textureWall.loadFromFile(resourcePath() + "box1.png")) {
+        return EXIT_FAILURE;
+    }
+    sf::Sprite spriteWall(textureWall);
+    sf::RectangleShape rectWall;
     class wall wall1;
     wall1.position_.x_ = 600;
     wall1.position_.y_ = 600;
     wall1.rect_.setPosition(wall1.position_.x_, wall1.position_.y_);
-    for ( int i = 0; i < 8; i++) // It is considered to make another array for wall
-    {
-        wall* wall = new class wall();
-        wall -> position_.x_ =     202;
-        wall -> position_.y_ = i * 200;
-        wall -> rect_.setPosition(wall -> position_.x_, wall -> position_.y_);
-        ObjectManager.objectAdd(wall);
-    }
-    
+    for (int k = 0; k < 3; k++)
+        for ( int i = 0; i < 8; i++) // It is considered to make another array for wall
+            for ( int j = 0; j < 5; j++)
+        {
+            wall* wall = new class wall(0, 0, spriteWall, rectWall);
+//            wall -> spr_.setTexture(textureWall);
+            wall -> spr_.setTextureRect(sf::IntRect (0, 10, 102, 102));
+            if ( i > j )
+            {
+            wall -> position_.x_ = 0;
+            wall -> position_.y_ = i * 120 * k ;
+            }
+            if ( j > i )
+            {
+                wall -> position_.x_ = j * 120 * 3;
+                wall -> position_.y_ =     120 * k;
+            }
+            wall -> rect_.setPosition(wall -> position_.x_, wall -> position_.y_);
+            ObjectManager.objectAdd(wall);
+        }
     // The Rectangle
   /*  sf:: RectangleShape rect_;
     sf:: Sprite spr_;
@@ -139,6 +183,7 @@ int main(int, char const**)
         sf::Time elapsed2 = clock2.getElapsedTime();
         sf::Time elapsed3 = clock3.getElapsedTime();
         
+        // Press Space and R to Make Bullet
         int coolDown = 0;
         if (elapsed1.asSeconds() >= tank1.attackSpeed)
         {
@@ -147,6 +192,19 @@ int main(int, char const**)
             {
                 Bullet* bullet = new Bullet(tank1.position_.x_ + 38 , tank1.position_.y_ + 40, spriteBullet, rectBullet);
                 bullet -> direction_ = tank1.direction_;
+                bullet -> objectOwner = 3;
+                ObjectManager.objectAdd(bullet);
+            }
+        }
+        
+        if (elapsed2.asSeconds() >= tank2.attackSpeed)
+        {
+            clock2.restart();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) // Create new bullet, put pointer in objectManager
+            {
+                Bullet* bullet = new Bullet(tank2.position_.x_ + 38 , tank2.position_.y_ + 40, spriteBullet, rectBullet);
+                bullet -> direction_ = tank2.direction_;
+                bullet -> objectOwner = 2;
                 ObjectManager.objectAdd(bullet);
             }
         }
@@ -190,7 +248,7 @@ int main(int, char const**)
            //(( tank1.position_.x_ + tank1.movementSpeed <= wall1.position_.x_ ) && (tank1.direction_ = 2))                            ||
            (( tank1.position_.y_ - tank1.movementSpeed <= wall1.position_.y_ ) &&  (tank1.direction_ = 1))  ||
            (( tank1.position_.x_ - tank1.movementSpeed <= wall1.position_.x_ ) &&  (tank1.direction_ = 4)))*/
-         if (tank1.rect_.getGlobalBounds().intersects(wall1.rect_.getGlobalBounds()))
+      /*   if (tank1.rect_.getGlobalBounds().intersects(wall1.rect_.getGlobalBounds()))
             {
                 // Hit Wall
                 if (tank1.direction_ == 1) // Up
@@ -224,14 +282,17 @@ int main(int, char const**)
             }
             
 //            counter++;
-//        }
+//        }*/
         
 
 
         // Draw the sprite
-        window.draw(Dud.spr_);
+        window.draw(spriteDud);
         window.draw(tank1.spr_);
-        window.draw(wall1.rect_);
+        window.draw(tank2.spr_);
+
+//        window.draw(tank2.spr_);
+       // window.draw(wall1.rect_);
         //window.draw(rect_);
 //        window.draw(spriteBullet);
         

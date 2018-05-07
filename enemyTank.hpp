@@ -27,8 +27,10 @@ public:
 
     
     // For objectManager
-    //    virtual draw() override;
-    //    virtual move() override;
+        virtual int draw(sf::RenderWindow* window) override;
+        virtual int update() override;
+        virtual int collision() override;
+
 };
 #endif /* enemyTank_hpp */
 
